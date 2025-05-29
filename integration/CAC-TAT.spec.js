@@ -119,7 +119,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         .should('be.checked')// Faz a asserção: verifica se o radio button está de fato marcado
             })
     })
-   it('Marca ambos checkboxes, depois desmarca o ultimo',()=>{
+   it('Marca ambos checkboxes, depois desmarca o ultimo',() => {
         
     cy.get('input[type="checkbox"]')// Seleciona todos os elementos input do tipo checkbox na página
         .check()// Marca (seleciona) todos os checkboxes encontrados
@@ -128,6 +128,15 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         .should('be.not.checked')// Faz a asserção: verifica se o último checkbox está de fato desmarcado
              
     }) 
+    // Teste que seleciona um arquivo da pasta fixtures
+it('Seleciona um arquivo da pasta fixtures', () => {
+    
+    cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
+        .selectFile('cypress/fixtures/example.json')// Seleciona o arquivo "example.json" que está na pasta "cypress/fixtures"
+        .should(input => { 
+            expect(input[0].files[0].name).to.equal('example.json')// Verifica se o arquivo selecionado é o "example.json"
+        })
+    })
 
     
 })
