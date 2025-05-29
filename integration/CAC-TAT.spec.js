@@ -40,11 +40,11 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     })
 
-    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário',() => {
         cy.get('#firstName').type('Bruno')//ex:#firstname é a ID
         cy.get('#lastName').type('Campos')
         cy.get('#email').type('brunocampos@exemplo.com')
-        cy.get('#phone-checkbox').click()//se marcar que o meio de contato é por telefone e clicar
+        cy.get('#phone-checkbox').check()//usar check para marcar checkbox é mais confiavel
         cy.get('#open-text-area').type('test')
         cy.contains('button', 'Enviar').click()//Submit é a class
 
@@ -84,21 +84,50 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('.success').should('be.visible')
     })
 
+     //Seleciona um campo em um dropdown 
     it('Seleciona um produto (Youtube) por seu texto',function(){
         cy.get('#product')
         .select('YouTube')//Esse é conteudo que está escrito como no app
         .should('have.value','youtube')// Esse é o valor que está no HTML
     })
 
-    it.only('seleciona um produto (Mentoria) por seu valor (value)',function(){
+    it('seleciona um produto (Mentoria) por seu valor (value)', () =>{
         cy.get('#product')
         .select('mentoria')
         .should('have.value','mentoria')
     })
     
-    it('seleciona um produto (Blog) por seu índice',function(){
+    it('seleciona um produto (Blog) por seu índice',() =>{
         cy.get('#product')
         .select(1)
         .should('have.value','blog')
     })
+
+    //Seleciona um campo do tipo Radio 
+    it('Marca o tipo de atendimento "Feedback"', () =>{
+        cy.get('input[type="radio"][value="feedback"]')
+        .check()
+        .should('be.checked') 
+    })
+
+    // Define um caso de teste com o título "Marca cada tipo de atendimento"
+    it('Marca cada tipo de atendimento', () => {
+    cy.get('input[type="radio"]')// Seleciona todos os elementos input do tipo radio na página
+        .each(tipoDeServico => {// Itera sobre cada elemento encontrado
+        cy.wrap(tipoDeServico)// cy.wrap() → transforma o elemento DOM em um objeto Cypress.
+        .check()// Marca (seleciona) o radio button atual
+        .should('be.checked')// Faz a asserção: verifica se o radio button está de fato marcado
+            })
+    })
+   it('Marca ambos checkboxes, depois desmarca o ultimo',()=>{
+        
+    cy.get('input[type="checkbox"]')// Seleciona todos os elementos input do tipo checkbox na página
+        .check()// Marca (seleciona) todos os checkboxes encontrados
+        .last()// Pega o último checkbox da lista de checkboxes selecionados
+        .uncheck()// Desmarca (desseleciona) o último checkbox
+        .should('be.not.checked')// Faz a asserção: verifica se o último checkbox está de fato desmarcado
+             
+    }) 
+
+    
 })
