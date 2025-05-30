@@ -40,7 +40,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     })
 
-    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário',() => {
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário',() => {
         cy.get('#firstName').type('Bruno')//ex:#firstname é a ID
         cy.get('#lastName').type('Campos')
         cy.get('#email').type('brunocampos@exemplo.com')
@@ -119,8 +119,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         .should('be.checked')// Faz a asserção: verifica se o radio button está de fato marcado
             })
     })
-   it('Marca ambos checkboxes, depois desmarca o ultimo',() => {
-        
+   it('Marca ambos checkboxes, depois desmarca o ultimo',() => {   
     cy.get('input[type="checkbox"]')// Seleciona todos os elementos input do tipo checkbox na página
         .check()// Marca (seleciona) todos os checkboxes encontrados
         .last()// Pega o último checkbox da lista de checkboxes selecionados
@@ -130,7 +129,6 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     }) 
     // Teste que seleciona um arquivo da pasta fixtures
     it('Seleciona um arquivo da pasta fixtures', () => {
-    
     cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
         .selectFile('cypress/fixtures/example.json')// Seleciona o arquivo "example.json" que está na pasta "cypress/fixtures"
         .should(input => { 
@@ -145,14 +143,16 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         })
     })
 
-    it.only('Seleciona um arquivo utilizando uma fixturepara a qual foi dada um alias',()=>{
-        cy.fixture('example.json').as('sampleFile')
-        cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
-        .selectFile('@sampleFile')
-        .should(input => { 
-            expect(input[0].files[0].name).to.equal('example.json')// Verifica se o arquivo selecionado é o "example.json"
+
+    it('Seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
+        cy.fixture('example.json').as('sampleFile')// Carrega o arquivo "example.json" da pasta fixtures e dá o alias "sampleFile"
+        cy.get('#file-upload')// Seleciona o input de upload de arquivo pelo ID
+        .selectFile('@sampleFile')// Usa o arquivo com o alias '@sampleFile' para simular o upload
+        .should(input => {// Verifica se o arquivo selecionado é o esperado
+            expect(input[0].files[0].name).to.equal('example.json')
         })
-    })
+})
+
 
     
 })
