@@ -147,12 +147,23 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     it('Seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
         cy.fixture('example.json').as('sampleFile')// Carrega o arquivo "example.json" da pasta fixtures e dá o alias "sampleFile"
         cy.get('#file-upload')// Seleciona o input de upload de arquivo pelo ID
-        .selectFile('@sampleFile')// Usa o arquivo com o alias '@sampleFile' para simular o upload
+            .selectFile('@sampleFile')// Usa o arquivo com o alias '@sampleFile' para simular o upload
         .should(input => {// Verifica se o arquivo selecionado é o esperado
             expect(input[0].files[0].name).to.equal('example.json')
         })
 })
+    it('Verifica que a politica de privacidade abre em outra aba sem a necessidade de um clique', ()=>{
+        cy.contains('a','Política de Privacidade')//→ seleciona a tag <a> cujo conteudo é Política de Privacidade.
+            should('have.attr','href','privacy.html')//valida se o atributo href com valor privacy.html
+            .and('have.attr','target','_blank')//E valida se o atributo target do elemento é _blank.
+    })
 
+    it.only('Acessa a página de privacidade removendo o target e então clicando no link',()=>{
+        cy.contains('a','Política de Privacidade')//→ seleciona a tag <a> cujo conteudo é Política de Privacidade.
+            .invoke('removeAttr','target')//invoca a função remover o atributo, depois a o que quer remover 
+            .click()
 
+        cy.contains('h1','CAC TAT - Política de privacidade').should('be.visible')
+    })
     
 })
