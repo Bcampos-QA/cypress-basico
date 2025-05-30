@@ -129,10 +129,26 @@ describe('Central de Atendimento ao Cliente TAT', function () {
              
     }) 
     // Teste que seleciona um arquivo da pasta fixtures
-it('Seleciona um arquivo da pasta fixtures', () => {
+    it('Seleciona um arquivo da pasta fixtures', () => {
     
     cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
         .selectFile('cypress/fixtures/example.json')// Seleciona o arquivo "example.json" que está na pasta "cypress/fixtures"
+        .should(input => { 
+            expect(input[0].files[0].name).to.equal('example.json')// Verifica se o arquivo selecionado é o "example.json"
+        })
+    })
+    it('Seleciona um arquivo simulando um drag-and-drop',()=>{
+        cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
+        .selectFile('cypress/fixtures/example.json',{action:'drag-drop'})// Seleciona o arquivo "example.json" que está na pasta "cypress/fixtures" e simula um drag-drop
+        .should(input => { 
+            expect(input[0].files[0].name).to.equal('example.json')// Verifica se o arquivo selecionado é o "example.json"
+        })
+    })
+
+    it.only('Seleciona um arquivo utilizando uma fixturepara a qual foi dada um alias',()=>{
+        cy.fixture('example.json').as('sampleFile')
+        cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
+        .selectFile('@sampleFile')
         .should(input => { 
             expect(input[0].files[0].name).to.equal('example.json')// Verifica se o arquivo selecionado é o "example.json"
         })
