@@ -4,10 +4,10 @@
   "description": "É necessário ter o **Node.js**, **npm** e **Git** instalados para executar este projeto.",
   "main": "index.js",
   "scripts": {
-     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-     "cypress:open": "cypress open" // Adicione esta linha
+  "cy:open": "cypress open",
+  "test": "cypress run"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Bcampos-QA/Cypress.git"
