@@ -1,14 +1,23 @@
 name: End-to-end tests
-on: push
+
+on:
+  push:
+    branches: [ main]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
+        with:
+          working-directory: .  # <-- opcional se já estiver na raiz
+
 
 
