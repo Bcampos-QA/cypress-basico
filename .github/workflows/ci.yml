@@ -1,8 +1,4 @@
-name: End-to-end tests
 
-on:
-  push:
-    branches: [ main]
 name: Cypress Tests
 
 on: [push, pull_request]
