@@ -6,7 +6,7 @@ module.exports = defineConfig({
       // configure event listeners aqui, se precisar
     },
     specPattern: 'cypress/integration/**/*.spec.js',
-    baseUrl: 'http://localhost:8080', // ou a URL da sua aplicação
+    baseUrl: './src/index.html', // ou a URL da sua aplicação
     supportFile: false, // <---- desativa o support file
   }
 })
