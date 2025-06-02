@@ -3,21 +3,31 @@ name: End-to-end tests
 on:
   push:
     branches: [ main]
+name: Cypress Tests
+
+on: [push, pull_request]
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Instalar dependências
+      - name: Install dependencies
         run: npm ci
+
+      - name: Start app
+        run: npm start &
+        env:
+          CI: true
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:8080
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        with:
-          working-directory: .  # <-- opcional se já estiver na raiz
 
 
 
