@@ -7,10 +7,10 @@ jobs:
       -- name: Checkout
         uses: actions/checkout@v4
 
-      - name: Instalar dependências
+      -- name: Instalar dependências
         run: npm install
 
-      - name: Cypress run
+      -- name: Cypress run
         uses: cypress-io/github-action@v6
 
 
