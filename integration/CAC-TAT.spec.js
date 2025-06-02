@@ -162,7 +162,6 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.contains('a','Política de Privacidade')//→ seleciona a tag <a> cujo conteudo é Política de Privacidade.
             .invoke('removeAttr','target')//invoca a função remover o atributo, depois a o que quer remover 
             .click()
-
         cy.contains('h1','CAC TAT - Política de privacidade').should('be.visible')
     })
     
