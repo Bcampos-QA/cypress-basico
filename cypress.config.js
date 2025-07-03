@@ -5,3 +5,10 @@ module.exports = defineConfig({
   viewportWidth: 1280,
   e2e: {},
 })
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig({
+  e2e: {
+    supportFile: false,
+  },
+});
