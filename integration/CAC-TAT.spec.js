@@ -3,7 +3,7 @@
 //intelissence:ao passar o mouse posso visitar urls relativas 
 describe('Central de Atendimento ao Cliente TAT', function () {
     beforeEach(() => {
-        cy.visit('./src/index.html')//cy.visit = caminho relativo da url
+        cy.visit('src/index.html')//cy.visit = caminho relativo da url
     })
 
     it('verifica o título da aplicação', function () {
@@ -154,15 +154,15 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 })
     it('Verifica que a politica de privacidade abre em outra aba sem a necessidade de um clique', ()=>{
         cy.contains('a','Política de Privacidade')//→ seleciona a tag <a> cujo conteudo é Política de Privacidade.
-            should('have.attr','href','privacy.html')//valida se o atributo href com valor privacy.html
+            .should('have.attr','href','privacy.html')//valida se o atributo href com valor privacy.html
             .and('have.attr','target','_blank')//E valida se o atributo target do elemento é _blank.
     })
 
-    it.only('Acessa a página de privacidade removendo o target e então clicando no link',()=>{
+    it('Acessa a página de privacidade removendo o target e então clicando no link',()=>{
         cy.contains('a','Política de Privacidade')//→ seleciona a tag <a> cujo conteudo é Política de Privacidade.
             .invoke('removeAttr','target')//invoca a função remover o atributo, depois a o que quer remover 
             .click()
-        cy.contains('h1','CAC TAT - Política de privacidade').should('be.visible')
+        cy.contains('h1','CAC TAT - Política de Privacidade').should('be.visible')
     })
     
 })
