@@ -1,0 +1,27 @@
+{
+  "name": "cypress-basico-v2-main",
+  "version": "1.0.0",
+  "description": "É necessário ter o **Node.js**, **npm** e **Git** instalados para executar este projeto.",
+  "main": "index.js",
+  "scripts": {
+  "cy:open": "cypress open",
+  "test": "cypress run"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bcampos-QA/Cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bcampos-QA/Cypress/issues"
+  },
+  "homepage": "https://github.com/Bcampos-QA/Cypress#readme",
+  "devDependencies": {
+    "cypress": "^14.4.0"
+  }
+
+}
