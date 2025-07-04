@@ -144,14 +144,24 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
 
-    it('Seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
-        cy.fixture('example.json').as('sampleFile')// Carrega o arquivo "example.json" da pasta fixtures e dá o alias "sampleFile"
-        cy.get('#file-upload')// Seleciona o input de upload de arquivo pelo ID
-            .selectFile('@sampleFile')// Usa o arquivo com o alias '@sampleFile' para simular o upload
-        .should(input => {// Verifica se o arquivo selecionado é o esperado
-            expect(input[0].files[0].name).to.equal('example.json')
-        })
+  it.only('Seleciona um arquivo utilizando uma fixture para a qual foi dado um alias', () => {
+  cy.fixture('example.json').as('sampleFile') // Carrega o arquivo e dá alias
+
+  cy.get('@sampleFile').then(fileContent => {
+    cy.get('#file-upload')
+      .selectFile({
+        contents: fileContent,
+        fileName: 'example.json',
+        mimeType: 'application/json',
+        lastModified: Date.now()
+      })
+      .should(input => {
+        expect(input[0].files[0].name).to.equal('example.json')
+      })
+  })
 })
+
+        
     it('Verifica que a politica de privacidade abre em outra aba sem a necessidade de um clique', ()=>{
         cy.contains('a','Política de Privacidade')//→ seleciona a tag <a> cujo conteudo é Política de Privacidade.
             .should('have.attr','href','privacy.html')//valida se o atributo href com valor privacy.html
