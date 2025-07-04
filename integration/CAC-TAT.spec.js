@@ -137,7 +137,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
     it('Seleciona um arquivo simulando um drag-and-drop',()=>{
         cy.get('#file-upload')// Localiza o elemento de upload de arquivo pelo ID
-        .selectFile('cypress/fixtures/example.json',{action:'drag-drop'})// Seleciona o arquivo "example.json" que está na pasta "cypress/fixtures" e simula um drag-drop
+        .selectFile('fixtures/example.json',{action:'drag-drop'})// Seleciona o arquivo "example.json" que está na pasta "cypress/fixtures" e simula um drag-drop
         .should(input => { 
             expect(input[0].files[0].name).to.equal('example.json')// Verifica se o arquivo selecionado é o "example.json"
         })
